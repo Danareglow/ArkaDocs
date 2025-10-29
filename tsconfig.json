@@ -1,9 +1,15 @@
 {
   "extends": "fastify-tsconfig",
   "compilerOptions": {
-    "rootDir": "./src",                         
-    "outDir": "./dist", 
-    "sourceMap": true
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "sourceMap": true,
+    "types": ["node"],
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "include": ["src/**/*.ts"]
 }
