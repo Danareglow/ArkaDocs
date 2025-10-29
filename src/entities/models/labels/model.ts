@@ -1,8 +1,9 @@
-import { Base } from "../../common";
-import { Labels } from "./labels";
-import { labelsSchemaMongo } from "./labels-mongo";
+import { Collection, getModel } from "../../../constants-definitions/function";
+import { Label } from "./labels"
+import { labelSchemaMongo } from "./labels-mongo";
 
-export const LabelsModel = getmodel<Labels>(
-  collection.LABELS,
-  labelsSchemaMongo
+
+export const LabelsModel = getModel<Label>(
+  Collection.LABELS,
+  labelSchemaMongo
 );

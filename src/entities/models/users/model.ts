@@ -1,4 +1,4 @@
-import { Collection, getModel } from "../../../constants-definitions";
+import { Collection, getModel } from "../../../constants-definitions/function";
 import { User } from "./user";
 import { UserSchemaMongo } from "./user-mongo";
 
