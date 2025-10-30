@@ -1,7 +1,7 @@
 import { Message } from "./messages";
 import { Schema } from "mongoose";
 
-export const messageSchemaMongo = new Schema<Message>(
+export const MessageSchemaMongo = new Schema<Message>(
   {
     uuid: { type: String, unique: true, default: () => crypto.randomUUID() },
     id_message: { type: String, unique: true },
@@ -17,3 +17,9 @@ export const messageSchemaMongo = new Schema<Message>(
     timestamps: true,
   }
 );
+
+MessageSchemaMongo.methods.toJSON = function () {
+  const { _id, ...message } = this.toObject();
+  message.id = _id;
+  return message;
+};

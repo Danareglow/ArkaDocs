@@ -6,6 +6,7 @@
     "sourceMap": true,
     "types": ["node"],
     "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
