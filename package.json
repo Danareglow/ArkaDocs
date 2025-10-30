@@ -9,7 +9,8 @@
   "scripts": {
     "test": "node --test test/**/*.test.js",
     "start": "fastify start -l info app.js",
-  "dev": "ts-node-dev --respawn --transpile-only --ignore-watch dist --ignore-watch node_modules src/server/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch dist --ignore-watch node_modules src/server/index.ts",
+    "typecheck": "node --max-old-space-size=8192 ./node_modules/typescript/bin/tsc --noEmit"
   },
   "keywords": [],
   "author": "",
@@ -23,10 +24,12 @@
     "fastify-cli": "^7.4.0",
     "fastify-plugin": "^5.0.0",
     "jsonwebtoken": "^9.0.0",
+    "bcryptjs": "^2.4.3",
     "mongoose": "^8.19.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "^24.9.1",
     "fastify-tsconfig": "^3.0.0",
     "ts-node": "^10.9.1",
