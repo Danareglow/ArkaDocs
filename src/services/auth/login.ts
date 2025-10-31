@@ -22,7 +22,21 @@ export const Login = async (data: LoginData): Promise<LoginResult> => {
 
   const match = await bcrypt.compare(data.password, user.password);
   if (!match) {
-    return new Error("LA CONTRASEÑA ES INCORRECTA");
+    // Backwards compatibility: if password stored in DB is plaintext (no bcrypt
+    // prefix) and equals the provided password, hash it now and accept login.
+    // This migrates old users to hashed passwords on first successful login.
+    try {
+      if (user.password === data.password) {
+        const newHash = await bcrypt.hash(data.password, 10);
+        await UsersModel.updateOne({ _id: user._id }, { password: newHash });
+        // replace password locally so token payload is accurate
+        user.password = newHash;
+      } else {
+        return new Error("LA CONTRASEÑA ES INCORRECTA");
+      }
+    } catch (err) {
+      return new Error("LA CONTRASEÑA ES INCORRECTA");
+    }
   }
 
   const JWT_SECRET = process.env.JWT_SECRET;

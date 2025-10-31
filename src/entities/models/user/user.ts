@@ -5,5 +5,4 @@ export interface User extends Base {
   email: string;
   password: string;
   role: "admin" | "collaborator" | "reviewer" | "reviewer_admin";
-  date_creation: Date;
 }

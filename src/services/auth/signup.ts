@@ -1,5 +1,6 @@
 import { createUserDto, User, UsersModel } from "../../entities";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 type SignupResult = {
   user: User;
@@ -9,7 +10,12 @@ type SignupResult = {
 export const signupUser = async (
   infoUser: createUserDto
 ): Promise<SignupResult> => {
-  const newUser = (await UsersModel.create(infoUser)) as User;
+  // Hash the user's password before saving
+  const saltRounds = 10;
+  const hashedPassword = await bcrypt.hash(infoUser.password, saltRounds);
+  const payload: createUserDto = { ...infoUser, password: hashedPassword };
+
+  const newUser = (await UsersModel.create(payload)) as User;
 
   const JWT_SECRET = process.env.JWT_SECRET;
   if (!JWT_SECRET) {
